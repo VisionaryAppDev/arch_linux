@@ -1,0 +1,128 @@
+# Create Partition Size
+## Create three primary partitions for, 
+### Root 
+### Home
+### Swap
+
+fdisk -l
+fdisk /dev/sda
+n
+
+# w
+#
+# => Format partition: 
+#		mkfs.ext4 /dev/sda1 
+#		mkfs.ext4 /dev/sda2
+#
+# => Make swap: mkswap /dev/sda3
+#
+# => Turn on swap: swapon: /dev/sda3
+# 
+# => mount /dev/sda1 /mnt
+#
+# => mkdir /mnt/home
+#
+# => mount /dev/sda2 /mnt/home
+#
+# press m for help
+# Size: 83 886 079 = 40 000 0000 Byte 
+#
+# base vs base-devel:
+# - https://www.archlinux.org/groups/x86_64/base/
+# - https://www.archlinux.org/groups/x86_64/base-devel/
+#  
+#
+######################################################
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+echo "Server = http://mirror.xtom.com/archlinux/\$repo/os/\$arch"  > /etc/pacman.d/mirrorlist 
+pacstrap /mnt base base-devel
+genfstab -U /mnt > /mnt/etc/fstab
+arch-chroot /mnt
+ln -sf /usr/share/zoneinfo/Asia/Phnom_Penh /etc/localtime
+hwclock --systohc
+locale-gen
+echo "yourpc" >> /etc/hostname
+echo -e "127.0.0.1\tlocalhost" > /etc/hosts
+echo -e "::1\t\tlocalhost" >> /etc/hosts 
+echo -e "127.0.1.1\cc.localdomain cc" >> /etc/hosts
+
+
+mkinitcpio -p linux
+passwd
+pacman -Syu intel-ucode grub reflector
+grub-install /dev/sda ## MAKE SURE THIS IS /DEV/SDA NOT /DEV/SDB or SOMETHING ELSE
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# Create service to run Reflector 
+echo -e "[Unit]\n
+		Description=Pacman mirrorlist update\n 
+		Wants=network-online.target\n
+		After=network-online.target\n\n 
+		[Service]\n
+		Type=oneshot\n 
+		ExecStart=/usr/bin/reflector --protocol https --latest 20 --sort rate --save /etc/pacman.d/mirrorlist\n 
+		\n
+		[Install]\n 
+		RequiredBy=multi-user.target" >> /etc/systemd/system/reflector.service
+
+		
+# WPA supplicant
+# pacman -S wpa_supplicant dhclient dialog
+# cat /etc/netctl/my_static_profile
+# Interface=enp1s0
+# Connection=ethernet
+# IP=static
+# Address=('192.168.1.10/24')
+# Gateway=('92.168.1.1')
+# DNS=('192.168.1.1')
+#
+#
+#
+
+echo -e "\n\n[archlinuxfr]\n  
+			SigLevel = Never\n 
+			Server = http://repo.archlinux.fr/\$arch" >> /etc/pacman.conf
+			
+			
+echo -e "\n\n[archlinuxcn]\n
+SigLevel = Never\n
+Server = http://repo.archlinuxcn.org/$arch" >> /etc/pacman.conf			
+
+
+pacman -Sy yaourt dhclient google-chrome firefox-nighty tor signal-desktop signal ttf-symbola npm jdk jdk8 vlc git  intellij-idea-ultimate-edition linux-lts xorg plasma emacs ark dolphin mariadb mongodb netctl redshift transmission-gtk wget bash-completion otf-fira-code ntfs-3g curl eog
+pacman install linux-lts-headers bleachbit konsole
+
+
+# Change grub delay
+sudo nano /etc/default/grub => GRUB_FORCE_HIDDEN_MENU="true"
+pacman -S ufw && ufw enable && ufw status verbos && systemctl enable ufw.service thermald xf86-input-libinput 
+pacman-optimize samsung_magician
+
+
+
+
+# Starting Service
+systemctl enable thermald.service
+
+
+
+#Nvidia
+https://gist.github.com/joariasl/e58ca997d2581236dc56#install-intel-video-driver
+
+
+#Cache data
+squid
+rescached
+
+https://wiki.archlinux.org/index.php/CPU_frequency_scaling
+https://wiki.archlinux.org/index.php/Dnscrypt-proxy
+https://wiki.archlinux.org/index.php/Swap_on_video_ram
+
+
+
+
+
+pacman -R vi sudo nano
+
+
+os-prober

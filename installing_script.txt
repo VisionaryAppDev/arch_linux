@@ -6,9 +6,9 @@
 
 fdisk -l
 fdisk /dev/sda
-n
 
-# w
+
+# Causion!!
 #
 # => Format partition: 
 #		mkfs.ext4 /dev/sda1 

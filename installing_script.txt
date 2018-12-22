@@ -126,3 +126,20 @@ pacman -R vi sudo nano
 
 
 os-prober
+
+
+
+
+
+
+
+
+
+
+
+# INSTALLING PRINTER: https://unix.stackexchange.com/questions/359531/installing-hp-printer-driver-for-arch-linux
+# Everything is root 
+pacman -Sy cups
+pacman -S hplip
+hp-setup -i
+gpasswd -a theUserNameOfPC sys

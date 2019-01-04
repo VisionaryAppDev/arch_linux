@@ -124,9 +124,14 @@ https://wiki.archlinux.org/index.php/Swap_on_video_ram
 
 pacman -R vi sudo nano
 
-
+# install after in Linux system not in live disk
 os-prober
 
+
+# grub-install: cannot find /boot/efi directory
+# 1. run mkinitcpio -p linux
+# 2. delete os-prober from live disk and reinstall install grub package
+# 3. grub-install /dev/sda (make sure it is in sda not sdb)
 
 
 

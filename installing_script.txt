@@ -1,3 +1,9 @@
+# wifi-menu
+# iwconfig wlp3s0 essid wifiname
+# dhcpcd wlp3s0
+
+
+
 # Create Partition Size
 ## Create three primary partitions for, 
 ### Root 

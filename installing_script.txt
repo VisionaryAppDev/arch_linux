@@ -100,9 +100,40 @@ pacman-optimize samsung_magician
 
 
 
+# Installing PSQL: https://www.netarky.com/programming/arch_linux/Arch_Linux_PostgreSQL_database_setup.html
+pacman -Syu postgresql
+
+# Before you can do anything, you must initialize a database storage area (cluster) on disk. In file system terms, a database cluster is a single directory under which all data is stored. It is completely up to you where you choose to store your data. There is no default, although locations such as /usr/local/pgsql/data or /var/lib/postgres/data are popular.
+sudo mkdir /var/lib/postgres/data 
+
+# Change the owner of the /var/lib/postgres directory and its contents to the postgres user (the default user set up by the install):
+sudo chown -c -R postgres:postgres /var/lib/postgres
+
+# To initialize a database cluster, use the command initdb, which is installed with PostgreSQL. This must be done as the postgres user, so become this user:
+sudo -i -u postgres
+initdb -D '/var/lib/postgres/data' # this one is in postgres console 
+
+# Start service
+sudo systemctl start postgresql
+
+# PostgreSQL is now running. By creating another PostgreSQL user as per your local Arch user ($USER), you can access the PostgreSQL database shell directly instead of having to log in as the postgres user:
+createuser -s -U postgres --interactive # after enter your pc username
+
+createdb myDatabaseName
+psql -d myDatabaseName
+\du
+
+
+
+
+
 
 # Starting Service
 systemctl enable thermald.service
+systemctl enable mysqld.service 
+systemctl enable dhcpcd.service
+systemctl enable postgresql.service 
+
 
 
 

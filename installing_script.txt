@@ -130,6 +130,9 @@ psql -d myDatabaseName
 \du
 
 
+# Allow access from anywhere
+sudo echo 'host    all             all              0.0.0.0/0' >> /var/lib/postgres/data/hba_file.conf 
+sudo echo "listen_addresses = '*'" >> /var/lib/postgres/data/postgresql.conf
 
 
 

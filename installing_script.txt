@@ -5,8 +5,8 @@
 
 
 # Create Partition Size
-## Create three primary partitions for, 
-### Root 
+## Create three primary partitions for,
+### Root
 ### Home
 ### Swap
 
@@ -16,14 +16,14 @@ fdisk /dev/sda
 
 # Causion!!
 #
-# => Format partition: 
-#		mkfs.ext4 /dev/sda1 
+# => Format partition:
+#		mkfs.ext4 /dev/sda1
 #		mkfs.ext4 /dev/sda2
 #
 # => Make swap: mkswap /dev/sda3
 #
 # => Turn on swap: swapon: /dev/sda3
-# 
+#
 # => mount /dev/sda1 /mnt
 #
 # => mkdir /mnt/home
@@ -31,16 +31,16 @@ fdisk /dev/sda
 # => mount /dev/sda2 /mnt/home
 #
 # press m for help
-# Size: 83 886 079 = 40 000 0000 Byte 
+# Size: 83 886 079 = 40 000 0000 Byte
 #
 # base vs base-devel:
 # - https://www.archlinux.org/groups/x86_64/base/
 # - https://www.archlinux.org/groups/x86_64/base-devel/
-#  
+#
 #
 ######################################################
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-echo "Server = http://mirror.xtom.com/archlinux/\$repo/os/\$arch"  > /etc/pacman.d/mirrorlist 
+echo "Server = http://mirror.xtom.com/archlinux/\$repo/os/\$arch"  > /etc/pacman.d/mirrorlist
 pacstrap /mnt base base-devel
 genfstab -U /mnt > /mnt/etc/fstab
 arch-chroot /mnt
@@ -49,7 +49,7 @@ hwclock --systohc
 locale-gen
 echo "yourpc" >> /etc/hostname
 echo -e "127.0.0.1\tlocalhost" > /etc/hosts
-echo -e "::1\t\tlocalhost" >> /etc/hosts 
+echo -e "::1\t\tlocalhost" >> /etc/hosts
 echo -e "127.0.1.1\cc.localdomain cc" >> /etc/hosts
 
 
@@ -59,19 +59,19 @@ pacman -Syu intel-ucode grub reflector
 grub-install /dev/sda ## MAKE SURE THIS IS /DEV/SDA NOT /DEV/SDB or SOMETHING ELSE
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Create service to run Reflector 
+# Create service to run Reflector
 echo -e "[Unit]\n
-		Description=Pacman mirrorlist update\n 
+		Description=Pacman mirrorlist update\n
 		Wants=network-online.target\n
-		After=network-online.target\n\n 
+		After=network-online.target\n\n
 		[Service]\n
-		Type=oneshot\n 
-		ExecStart=/usr/bin/reflector --protocol https --latest 20 --sort rate --save /etc/pacman.d/mirrorlist\n 
+		Type=oneshot\n
+		ExecStart=/usr/bin/reflector --protocol https --latest 20 --sort rate --save /etc/pacman.d/mirrorlist\n
 		\n
-		[Install]\n 
+		[Install]\n
 		RequiredBy=multi-user.target" >> /etc/systemd/system/reflector.service
 
-		
+
 # WPA supplicant
 # pacman -S wpa_supplicant dhclient dialog
 # cat /etc/netctl/my_static_profile
@@ -85,23 +85,47 @@ echo -e "[Unit]\n
 #
 #
 
-echo -e "\n\n[archlinuxfr]\n  
-			SigLevel = Never\n 
-			Server = http://repo.archlinux.fr/\$arch" >> /etc/pacman.conf
-			
-			
-echo -e "\n\n[archlinuxcn]\n
-SigLevel = Never\n
-Server = http://repo.archlinuxcn.org/$arch" >> /etc/pacman.conf			
+
+# echo -e "\n\n[archlinuxfr]\n
+# 			SigLevel = Never\n
+# 			Server = http://repo.archlinux.fr/\$arch" >> /etc/pacman.conf
+# echo -e "\n\n[archlinuxcn]\n
+# SigLevel = Never\n
+# Server = http://repo.archlinuxcn.org/$arch" >> /etc/pacman.conf
 
 
-pacman -Sy yaourt dhclient google-chrome firefox-nighty tor signal-desktop signal ttf-symbola npm jdk jdk8 vlc git  intellij-idea-ultimate-edition linux-lts xorg plasma emacs ark dolphin mariadb mongodb netctl redshift transmission-gtk wget bash-completion otf-fira-code ntfs-3g curl eog
-pacman install linux-lts-headers bleachbit konsole
+
+
+
+# INSTALL YAY
+cd /tmp
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+## Enable coloring
+echo -e "\n\n\n\n\n\n\n\n# MY CONFIGURATION"
+echo -e "Color\n"
+echo -e "TotalDownload\n"
+echo -e "CheckSpace\n"
+echo -e "UseDelta     = 0.7\n"
+echo -e "VerbosePkgLists\n"
+echo -e "RemoteFileSigLevel = Required\n"
+
+
+# signal-desktop signal
+# jdk jdk8
+pacman -Syu dhclient tor npm vlc git linux-lts xorg plasma ark dolphin mariadb mongodb netctl redshift transmission-gtk wget bash-completion ntfs-3g curl eog
+pacman -Syu linux-lts-headers bleachbit konsole
+
+
+
+# INSTALL VIA YAY
+yay -Syu firefox-nighty google-chrome-dev intellij-idea-ue-eap jdk-openjdk otf-fira-code ttf-symbola
 
 
 # Change grub delay
 sudo nano /etc/default/grub => GRUB_FORCE_HIDDEN_MENU="true"
-pacman -S ufw && ufw enable && ufw status verbos && systemctl enable ufw.service thermald xf86-input-libinput 
+pacman -S ufw && ufw enable && ufw status verbos && systemctl enable ufw.service thermald xf86-input-libinput
 pacman-optimize samsung_magician
 
 
@@ -110,14 +134,14 @@ pacman-optimize samsung_magician
 pacman -Syu postgresql
 
 # Before you can do anything, you must initialize a database storage area (cluster) on disk. In file system terms, a database cluster is a single directory under which all data is stored. It is completely up to you where you choose to store your data. There is no default, although locations such as /usr/local/pgsql/data or /var/lib/postgres/data are popular.
-sudo mkdir /var/lib/postgres/data 
+sudo mkdir /var/lib/postgres/data
 
 # Change the owner of the /var/lib/postgres directory and its contents to the postgres user (the default user set up by the install):
 sudo chown -c -R postgres:postgres /var/lib/postgres
 
 # To initialize a database cluster, use the command initdb, which is installed with PostgreSQL. This must be done as the postgres user, so become this user:
 sudo -i -u postgres
-initdb -D '/var/lib/postgres/data' # this one is in postgres console 
+initdb -D '/var/lib/postgres/data' # this one is in postgres console
 
 # Start service
 sudo systemctl start postgresql
@@ -131,7 +155,7 @@ psql -d myDatabaseName
 
 
 # Allow access from anywhere
-sudo echo 'host    all             all              0.0.0.0/0' >> /var/lib/postgres/data/hba_file.conf 
+sudo echo 'host    all             all              0.0.0.0/0' >> /var/lib/postgres/data/hba_file.conf
 sudo echo "listen_addresses = '*'" >> /var/lib/postgres/data/postgresql.conf
 
 
@@ -139,9 +163,9 @@ sudo echo "listen_addresses = '*'" >> /var/lib/postgres/data/postgresql.conf
 
 # Starting Service
 systemctl enable thermald.service
-systemctl enable mysqld.service 
+systemctl enable mysqld.service
 systemctl enable dhcpcd.service
-systemctl enable postgresql.service 
+systemctl enable postgresql.service
 
 
 
@@ -162,7 +186,7 @@ https://wiki.archlinux.org/index.php/Swap_on_video_ram
 
 
 
-pacman -R vi sudo nano
+pacman -R vi nano
 
 # install after in Linux system not in live disk
 os-prober
@@ -183,7 +207,7 @@ os-prober
 
 
 # INSTALLING PRINTER: https://unix.stackexchange.com/questions/359531/installing-hp-printer-driver-for-arch-linux
-# Everything is root 
+# Everything is root
 pacman -Sy cups
 pacman -S hplip
 hp-setup -i

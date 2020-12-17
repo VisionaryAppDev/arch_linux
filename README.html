@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-12-17 Thu 16:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arch Linux Installation</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Arch Linux Installation</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org92bbecc">1. Connect to Wifi network</a></li>
+<li><a href="#org2946e9e">2. Create Partition Size</a></li>
+<li><a href="#org1065ed6">3. Based Installation</a>
+<ul>
+<li><a href="#orgcf9bbee">3.1. Update Mirror</a></li>
+<li><a href="#org7f6d004">3.2. Installing</a></li>
+</ul>
+</li>
+<li><a href="#org9c82384">4. Real OS</a>
+<ul>
+<li><a href="#orgdd27253">4.1. Basic Configuration</a></li>
+<li><a href="#org4bfae66">4.2. User User and Password</a></li>
+<li><a href="#org61d799c">4.3. Bootloader</a></li>
+<li><a href="#orgc3c3462">4.4. Basic Package</a></li>
+<li><a href="#org618de4a">4.5. Yay Installation</a></li>
+<li><a href="#org051100f">4.6. Change grub delay</a></li>
+<li><a href="#org3d1474b">4.7. Postgres Installation</a></li>
+<li><a href="#orga40a34f">4.8. Mariadb Installation</a></li>
+<li><a href="#org98a2bd9">4.9. PHP Installation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org92bbecc" class="outline-2">
+<h2 id="org92bbecc"><span class="section-number-2">1</span> Connect to Wifi network</h2>
+<div class="outline-text-2" id="text-1">
+<pre class="example">
+# wifi-menu
+# iwconfig wlp3s0 essid wifiname
+# dhcpcd wlp3s0
+
+
+# ip link set wlp7s0 down
+# netctl restart wlp7s0-123456789
+
+# WPA supplicant
+# pacman -S wpa_supplicant dhclient dialog
+# cat /etc/netctl/my_static_profile
+# Interface=enp1s0
+# Connection=ethernet
+# IP=static
+# Address=('192.168.1.10/24')
+# Gateway=('92.168.1.1')
+# DNS=('192.168.1.1')
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org2946e9e" class="outline-2">
+<h2 id="org2946e9e"><span class="section-number-2">2</span> Create Partition Size</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Create 4 primary partitions:
+</p>
+<ul class="org-ul">
+<li>EFI 512M # Must be first partition</li>
+<li>Root</li>
+<li>Home</li>
+<li>Swap</li>
+</ul>
+
+<p>
+<b>NOTE</b>: +512M so you don't need to specific range of start and end sector 
+</p>
+<pre class="example">
+fdisk -l
+fdisk /dev/sda
+
+# Causion!!
+#
+# =&gt; Format partitions:
+#		mkfs.fat -F32 /dev/sda1
+#		mkfs.ext4 /dev/sda2
+#		mkfs.ext4 /dev/sda2
+#
+# =&gt; Swap:
+#		mkswap /dev/sda4
+#		swapon: /dev/sda4
+#
+# =&gt; Mount
+# 		mount /dev/sda2 /mnt
+#		mkdir /mnt/home
+# 		mount /dev/sda3 /mnt/home
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org1065ed6" class="outline-2">
+<h2 id="org1065ed6"><span class="section-number-2">3</span> Based Installation</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+base vs base-devel:
+</p>
+<ul class="org-ul">
+<li><a href="https://www.archlinux.org/groups/x86_64/base/">https://www.archlinux.org/groups/x86_64/base/</a></li>
+<li><a href="https://www.archlinux.org/groups/x86_64/base-devel/">https://www.archlinux.org/groups/x86_64/base-devel/</a></li>
+</ul>
+</div>
+
+<div id="outline-container-orgcf9bbee" class="outline-3">
+<h3 id="orgcf9bbee"><span class="section-number-3">3.1</span> Update Mirror</h3>
+<div class="outline-text-3" id="text-3-1">
+<pre class="example">
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+echo "Server = http://mirror.xtom.com/archlinux/\$repo/os/\$arch"  &gt; /etc/pacman.d/mirrorlist
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7f6d004" class="outline-3">
+<h3 id="org7f6d004"><span class="section-number-3">3.2</span> Installing</h3>
+<div class="outline-text-3" id="text-3-2">
+<pre class="example">
+pacstrap /mnt base base-devel linux linux-firmware vim
+genfstab -U /mnt &gt; /mnt/etc/fstab
+</pre>
+
+<p>
+<b>Note</b> If error related to core.db, &#x2026;.db then check its content. If the content is full of html, then there is something block the connection. This happen especially at GDCE
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9c82384" class="outline-2">
+<h2 id="org9c82384"><span class="section-number-2">4</span> Real OS</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgdd27253" class="outline-3">
+<h3 id="orgdd27253"><span class="section-number-3">4.1</span> Basic Configuration</h3>
+<div class="outline-text-3" id="text-4-1">
+<pre class="example">
+arch-chroot /mnt
+ln -sf /usr/share/zoneinfo/Asia/Phnom_Penh /etc/localtime
+hwclock --systohc
+locale-gen
+echo "yourpc" &gt;&gt; /etc/hostname
+echo -e "127.0.0.1\tlocalhost" &gt; /etc/hosts
+echo -e "::1\t\tlocalhost" &gt;&gt; /etc/hosts
+echo -e "127.0.1.1\cc.localdomain cc" &gt;&gt; /etc/hosts
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4bfae66" class="outline-3">
+<h3 id="org4bfae66"><span class="section-number-3">4.2</span> User User and Password</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>Root Password</li>
+</ul>
+<pre class="example">
+passwd 
+</pre>
+
+<ul class="org-ul">
+<li>Add User</li>
+</ul>
+<pre class="example">
+useradd yourpc -m yourpc
+su yourpc passwd
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org61d799c" class="outline-3">
+<h3 id="org61d799c"><span class="section-number-3">4.3</span> Bootloader</h3>
+<div class="outline-text-3" id="text-4-3">
+<pre class="example">
+pacman -S grub efibootmgr
+mkdir /boot/efi
+mount /dev/sda1 /boot/efi
+grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
+grub-mkconfig -o /boot/grub/grub.cfg
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgc3c3462" class="outline-3">
+<h3 id="orgc3c3462"><span class="section-number-3">4.4</span> Basic Package</h3>
+<div class="outline-text-3" id="text-4-4">
+<pre class="example">
+pacman -Syu telegram-desktop kcolorpicker ark lrzip lzop p7zip unarchiver unrar
+pacman -Syu dhclient tor npm vlc git xorg plasma dolphin netctl redshift transmission-gtk wget bash-completion ntfs-3g curl eog 
+pacman -Syu linux-lts-headers linux-lts  bleachbit konsole
+
+
+# INSTALL VIA YAY
+yay -Syu firefox-nighty google-chrome-dev intellij-idea-ue-eap jdk-openjdk otf-fira-code ttf-symbola
+
+
+# Wifi 
+sudo pacman -S wpa_supplicant wireless_tools networkmanager
+sudo pacman -S modemmanager mobile-broadband-provider-info usb_modeswitch
+
+
+# not sure what it is but know it is UI # sudo pacman -S nm-connection-editor network-manager-applet
+sudo systemctl enable NetworkManager.service
+sudo systemctl enable wpa_supplicant.service
+sudo systemctl disable dhcpcd.service
+
+
+# Add netspeed from KDE Widget
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org618de4a" class="outline-3">
+<h3 id="org618de4a"><span class="section-number-3">4.5</span> Yay Installation</h3>
+<div class="outline-text-3" id="text-4-5">
+<pre class="example">
+cd /tmp
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+
+## Enable coloring
+echo -e "
+\n\n\n\n
+Color
+TotalDownload
+CheckSpace
+UseDelta     = 0.7
+VerbosePkgLists
+RemoteFileSigLevel = Required
+" | sudo tee -a /etc/pacman.conf
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org051100f" class="outline-3">
+<h3 id="org051100f"><span class="section-number-3">4.6</span> Change grub delay</h3>
+<div class="outline-text-3" id="text-4-6">
+<pre class="example">
+sudo vim /etc/default/grub =&gt; GRUB_FORCE_HIDDEN_MENU="true"
+pacman -S ufw &amp;&amp; ufw enable &amp;&amp; ufw status verbos &amp;&amp; systemctl enable ufw.service thermald xf86-input-libinput
+pacman-optimize samsung_magician
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org3d1474b" class="outline-3">
+<h3 id="org3d1474b"><span class="section-number-3">4.7</span> Postgres Installation</h3>
+<div class="outline-text-3" id="text-4-7">
+<pre class="example">
+# Installing PSQL: https://www.netarky.com/programming/arch_linux/Arch_Linux_PostgreSQL_database_setup.html
+pacman -Syu postgresql
+
+# Before you can do anything, you must initialize a database storage area (cluster) on disk. In file system terms, a database cluster is a single directory under which all data is stored. It is completely up to you where you choose to store your data. There is no default, although locations such as /usr/local/pgsql/data or /var/lib/postgres/data are popular.
+sudo mkdir /var/lib/postgres/data
+
+# Change the owner of the /var/lib/postgres directory and its contents to the postgres user (the default user set up by the install):
+sudo chown -c -R postgres:postgres /var/lib/postgres
+
+# To initialize a database cluster, use the command initdb, which is installed with PostgreSQL. This must be done as the postgres user, so become this user:
+sudo -i -u postgres
+initdb -D '/var/lib/postgres/data' # this one is in postgres console
+
+# Start service
+sudo systemctl start postgresql
+
+# PostgreSQL is now running. By creating another PostgreSQL user as per your local Arch user ($USER), you can access the PostgreSQL database shell directly instead of having to log in as the postgres user:
+createuser -s -U postgres --interactive # after enter your pc username
+
+createdb myDatabaseName
+psql -d myDatabaseName
+\du
+
+
+# Allow access from anywhere
+sudo echo 'host    all             all              0.0.0.0/0' &gt;&gt; /var/lib/postgres/data/hba_file.conf
+sudo echo "listen_addresses = '*'" &gt;&gt; /var/lib/postgres/data/postgresql.conf
+
+
+# mount opt from home
+echo "/home/yourpc/app/opt /opt none bind 0 0" &gt;&gt; /etc/fstab
+
+systemctl enable postgresql.service
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orga40a34f" class="outline-3">
+<h3 id="orga40a34f"><span class="section-number-3">4.8</span> Mariadb Installation</h3>
+<div class="outline-text-3" id="text-4-8">
+<pre class="example">
+sudo pacman -S mariadb
+systemctl enable mysqld.service
+</pre>
+
+
+<p>
+systemctl enable thermald.service
+</p>
+
+
+
+
+<p>
+#Nvidia
+<a href="https://gist.github.com/joariasl/e58ca997d2581236dc56#install-intel-video-driver">https://gist.github.com/joariasl/e58ca997d2581236dc56#install-intel-video-driver</a>
+</p>
+
+
+
+<p>
+<a href="https://wiki.archlinux.org/index.php/CPU_frequency_scaling">https://wiki.archlinux.org/index.php/CPU_frequency_scaling</a>
+<a href="https://wiki.archlinux.org/index.php/Dnscrypt-proxy">https://wiki.archlinux.org/index.php/Dnscrypt-proxy</a>
+<a href="https://wiki.archlinux.org/index.php/Swap_on_video_ram">https://wiki.archlinux.org/index.php/Swap_on_video_ram</a>
+</p>
+
+
+
+
+
+<p>
+pacman -R vi nano
+</p>
+
+<p>
+os-prober
+</p>
+
+
+
+
+
+
+
+
+
+
+<pre class="example">
+# Everything is root
+pacman -Sy cups
+pacman -S hplip
+hp-setup -i
+gpasswd -a theUserNameOfPC sys
+</pre>
+</div>
+</div>
+
+
+
+<div id="outline-container-org98a2bd9" class="outline-3">
+<h3 id="org98a2bd9"><span class="section-number-3">4.9</span> PHP Installation</h3>
+<div class="outline-text-3" id="text-4-9">
+<pre class="example">
+pacman -S pacman -S composer npm
+yay php72 php72-fpm php72-pgsql php72-redis php72-mcrypt
+
+
+
+echo "
+extension=oci8.so
+extension=ldap
+extension=mysqli
+extension=pdo_mysql
+extension=pdo_pgsql
+extension=pgsql
+" | sudo tee -a /etc/php72/php.ini
+# NOTE phpize72 is included in php72
+</pre>
+
+
+<ul class="org-ul">
+<li>Sample nginx.conf</li>
+</ul>
+<pre class="example">
+server {
+    listen 80;
+    listen [::]:80;
+    server_name company-api.test;
+
+    root /laravel-project/public/; 
+    index index.html index.htm index.php;
+
+
+    location / {
+       try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    error_page 404 /404.html;
+    error_page 500 502 503 504 /50x.html;
+
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php72-fpm/php-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2020-12-17 Thu 16:08</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

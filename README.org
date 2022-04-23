@@ -133,6 +133,13 @@ sudo systemctl disable dhcpcd.service
 # Add netspeed from KDE Widget
 #+END_SRC
 
+** Make makepkg build a little faster 
+#+BEGIN_SRC
+echo -e "
+MAKEFLAGS="-j$(nproc)"
+" | sudo tee -a /etc/makepkg.conf
+#+END_SRC
+
 
 ** Yay Installation
 #+BEGIN_SRC
@@ -152,6 +159,7 @@ VerbosePkgLists
 RemoteFileSigLevel = Required
 " | sudo tee -a /etc/pacman.conf
 #+END_SRC
+
 
 
 ** Change grub delay

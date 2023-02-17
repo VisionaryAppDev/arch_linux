@@ -109,6 +109,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 
 ** Basic Package
+Check this page for some group of plasma. `https://wiki.archlinux.org/title/KDE`. 
+
 #+BEGIN_SRC
 pacman -Syu telegram-desktop kcolorpicker ark lrzip lzop p7zip unarchiver unrar
 pacman -Syu dhclient tor npm vlc git xorg plasma dolphin netctl redshift transmission-gtk wget bash-completion ntfs-3g curl eog 

@@ -100,12 +100,25 @@ su yourpc passwd
 
 ** Bootloader
 #+BEGIN_SRC
-pacman -S grub efibootmgr
+pacman -S grub efibootmgr grub-customizer # this customerize is interested since it is allow you to select any default kernel to boot by default
 mkdir /boot/efi
 mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 #+END_SRC
+
+# Sample from grub-customizer
+cat /etc/default/grub
+```
+GRUB_TIMEOUT="1"
+GRUB_DEFAULT="Advanced options for Linux>Linux, with Linux linux"
+GRUB_SAVEDEFAULT="false"
+GRUB_DISABLE_OS_PROBER="true"
+GRUB_TIMEOUT_STYLE="menu"
+GRUB_TERMINAL_INPUT="console"
+GRUB_GFXMODE="auto"
+```
+
 
 
 ** Change Boot Order 
@@ -125,7 +138,22 @@ efibootmgr
 sudo rm -rf /boot/efi/EFI/boot-name
 
 # Change default boot to your fav eg "0003" that you got from `sudo efibootmgr` 
-echo "0003" > /boot/efi/BOOTNXT
+# Doesn't seem to work
+#echo "0003" > /boot/efi/BOOTNXT
+
+# Alternative Solution: /etc/systemd/system/my-auto-select-boot-menu.service
+```
+[Unit]
+Description=My Command
+
+[Service]
+ExecStart=efibootmgr -o 0003 -n 0003
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
+```
+
 
 # Restart to take effect
 

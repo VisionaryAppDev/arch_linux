@@ -108,6 +108,27 @@ grub-mkconfig -o /boot/grub/grub.cfg
 #+END_SRC
 
 
+** Change Boot Order 
+Please check /dev/sdaX accordingly 
+
+# If access from arch-chroot
+mount /dev/sda4    /mnt
+mount /dev/sda3    /mnt/boot/efi
+
+# If access from Arch linux
+mount /dev/sda3 /boot/efi
+
+# Print out all available boot menu and copy the order your want. eg, 0003 or 0004
+efibootmgr
+
+# Delete any boot menu your don't want at
+sudo rm -rf /boot/efi/EFI/boot-name
+
+# Change default boot to your fav eg "0003" that you got from `sudo efibootmgr` 
+echo "0003" > /boot/efi/BOOTNXT
+
+# Restart to take effect
+
 ** Basic Package
 Check this page for some group of plasma. `https://wiki.archlinux.org/title/KDE`. 
 

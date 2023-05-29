@@ -166,6 +166,14 @@ pacman -Syu dhclient tor npm vlc git xorg plasma dolphin netctl redshift transmi
 pacman -Syu linux-lts-headers linux-lts  bleachbit konsole
 pacman -Syu tree ufw spectacle simplescreenrecorder ripgrep gparted eog
 
+# Update firewall
+```
+sudo ufw default deny
+sudo ufw allow from 192.168.0.0/24
+sudo ufw allow from 192.168.0.0/16
+sudo ufw limit ssh
+sudo ufw enable
+````
 
 # INSTALL VIA YAY
 yay -Syu firefox-nighty google-chrome-dev intellij-idea-ue-eap jdk-openjdk otf-fira-code ttf-symbola

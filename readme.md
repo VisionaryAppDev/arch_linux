@@ -59,29 +59,33 @@ fdisk /dev/sda
 # 		mount /dev/sda3 /mnt/home
 ```
 
-# Based Installation
-base vs base-devel:
- - https://www.archlinux.org/groups/x86_64/base/
- - https://www.archlinux.org/groups/x86_64/base-devel/
-
- Update Mirror 
+# Update Mirror 
 ```
+# Option 1: select by ranking 
+sudo pacman -S reflector
+sudo /usr/bin/reflector --protocol https --latest 20 --sort rate --save /etc/pacman.d/mirrorlist
+
+
+# Option 2: some old mirror used to use
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 echo "Server = http://mirror.xtom.com/archlinux/\$repo/os/\$arch"  > /etc/pacman.d/mirrorlist
 ```
 
- Installing
+# Based Installation
+base vs base-devel:
+ - https://www.archlinux.org/groups/x86_64/base/
+ - https://www.archlinux.org/groups/x86_64/base-devel/
 ```
 pacstrap /mnt base base-devel linux linux-firmware vim
 genfstab -U /mnt > /mnt/etc/fstab
 ```
-
 *Note# If error related to core.db, ....db then check its content. If the content is full of html, then there is something block the connection. This happen especially at GDCE
 
 
 # Real OS
- Basic Configuration
- ```
+Basic Configuration
+
+```
 arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Asia/Phnom_Penh /etc/localtime
 hwclock --systohc
@@ -92,7 +96,7 @@ echo -e "::1\t\tlocalhost" >> /etc/hosts
 echo -e "127.0.1.1\cc.localdomain cc" >> /etc/hosts
 ```
 
- User User and Password
+## User User and Password
 - Root Password
 ```
 passwd 
@@ -128,27 +132,27 @@ GRUB_GFXMODE="auto"
 
 
 
- Change Boot Order 
+# Change Boot Order 
 Please check /dev/sdaX accordingly 
 
-# If access from arch-chroot
+## If access from arch-chroot
 mount /dev/sda4    /mnt
 mount /dev/sda3    /mnt/boot/efi
 
-# If access from Arch linux
+## If access from Arch linux
 mount /dev/sda3 /boot/efi
 
-# Print out all available boot menu and copy the order your want. eg, 0003 or 0004
+## Print out all available boot menu and copy the order your want. eg, 0003 or 0004
 efibootmgr
 
-# Delete any boot menu your don't want at
+## Delete any boot menu your don't want at
 sudo rm -rf /boot/efi/EFI/boot-name
 
-# Change default boot to your fav eg "0003" that you got from `sudo efibootmgr` 
-# Doesn't seem to work
+## Change default boot to your fav eg "0003" that you got from `sudo efibootmgr` 
+## Doesn't seem to work
 #echo "0003" > /boot/efi/BOOTNXT
 
-# Alternative Solution: /etc/systemd/system/my-auto-select-boot-menu.service
+## Alternative Solution: /etc/systemd/system/my-auto-select-boot-menu.service
 ```
 [Unit]
 Description=My Command
@@ -162,9 +166,8 @@ WantedBy=multi-user.target
 ```
 
 
-# Restart to take effect
 
- Basic Package
+# Basic Package
 Check this page for some group of plasma. `https://wiki.archlinux.org/title/KDE`. 
 
 ```

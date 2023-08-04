@@ -1,22 +1,29 @@
 # Connect to Wifi network
+
 ```
-# wifi-menu
-# iwconfig wlp3s0 essid wifiname
-# dhcpcd wlp3s0
+# Use root
+sudo su
+
+# Option 1
+wifi-menu
 
 
-# ip link set wlp7s0 down
-# netctl restart wlp7s0-123456789
+# Option 2
+iwconfig wlp3s0 essid wifi-name
+dhcpcd wlp3s0
+ip link set wlp3s0 down
+netctl restart wlp3s0-123456789
+
 
 # WPA supplicant
-# pacman -S wpa_supplicant dhclient dialog
-# cat /etc/netctl/my_static_profile
-# Interface=enp1s0
-# Connection=ethernet
-# IP=static
-# Address=('192.168.1.10/24')
-# Gateway=('92.168.1.1')
-# DNS=('192.168.1.1')
+sudo pacman -S wpa_supplicant dhclient dialog
+cat /etc/netctl/my_static_profile
+Interface=enp1s0
+Connection=ethernet
+IP=static
+Address=('192.168.1.10/24')
+Gateway=('92.168.1.1')
+DNS=('192.168.1.1')
 ```
 
 

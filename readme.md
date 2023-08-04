@@ -128,6 +128,9 @@ GRUB_DISABLE_OS_PROBER="true"
 GRUB_TIMEOUT_STYLE="menu"
 GRUB_TERMINAL_INPUT="console"
 GRUB_GFXMODE="auto"
+
+# Change grub delay
+GRUB_FORCE_HIDDEN_MENU="true"
 ```
 
 
@@ -136,23 +139,33 @@ GRUB_GFXMODE="auto"
 Please check /dev/sdaX accordingly 
 
 ## If access from arch-chroot
+```
 mount /dev/sda4    /mnt
 mount /dev/sda3    /mnt/boot/efi
+```
 
 ## If access from Arch linux
+```
 mount /dev/sda3 /boot/efi
+```
 
 ## Print out all available boot menu and copy the order your want. eg, 0003 or 0004
+```
 efibootmgr
+```
 
 ## Delete any boot menu your don't want at
+```
 sudo rm -rf /boot/efi/EFI/boot-name
+```
 
 ## Change default boot to your fav eg "0003" that you got from `sudo efibootmgr` 
 ## Doesn't seem to work
 #echo "0003" > /boot/efi/BOOTNXT
 
-## Alternative Solution: /etc/systemd/system/my-auto-select-boot-menu.service
+## Alternative Solution 
+/etc/systemd/system/my-auto-select-boot-menu.service
+
 ```
 [Unit]
 Description=My Command
@@ -175,6 +188,7 @@ pacman -Syu telegram-desktop kcolorpicker ark lrzip lzop p7zip unarchiver unrar 
 pacman -Syu dhclient tor npm vlc git xorg plasma dolphin netctl redshift transmission-gtk wget bash-completion ntfs-3g curl eog 
 pacman -Syu linux-lts-headers linux-lts  bleachbit konsole
 pacman -Syu tree ufw spectacle simplescreenrecorder ripgrep gparted eog
+```
 
 # Update firewall
 ```
@@ -186,23 +200,27 @@ sudo ufw enable
 ````
 
 # INSTALL VIA YAY
+```
 yay -Syu firefox-nighty google-chrome-dev intellij-idea-ue-eap jdk-openjdk otf-fira-code ttf-symbola
+```
 
 
 # Wifi 
+```
 sudo pacman -S wpa_supplicant wireless_tools networkmanager
 sudo pacman -S modemmanager mobile-broadband-provider-info usb_modeswitch
+```
 
 
 # not sure what it is but know it is UI # sudo pacman -S nm-connection-editor network-manager-applet
+```
 sudo systemctl enable NetworkManager.service
 sudo systemctl enable wpa_supplicant.service
 sudo systemctl disable dhcpcd.service
+```
 
 
 # Add netspeed from KDE Widget
-```
-
  Make makepkg build a little faster 
 ```
 echo -e "
@@ -231,62 +249,15 @@ RemoteFileSigLevel = Required
 ```
 
 
-
- Change grub delay
+# Some package
 ```
-sudo vim /etc/default/grub => GRUB_FORCE_HIDDEN_MENU="true"
 pacman -S ufw && ufw enable && ufw status verbos && systemctl enable ufw.service thermald xf86-input-libinput
 pacman-optimize samsung_magician
 ```
 
 
- Postgres Installation
-```
-# Installing PSQL: https://www.netarky.com/programming/arch_linux/Arch_Linux_PostgreSQL_database_setup.html
-pacman -Syu postgresql
-
-# Before you can do anything, you must initialize a database storage area (cluster) on disk. In file system terms, a database cluster is a single directory under which all data is stored. It is completely up to you where you choose to store your data. There is no default, although locations such as /usr/local/pgsql/data or /var/lib/postgres/data are popular.
-sudo mkdir /var/lib/postgres/data
-
-# Change the owner of the /var/lib/postgres directory and its contents to the postgres user (the default user set up by the install):
-sudo chown -c -R postgres:postgres /var/lib/postgres
-
-# To initialize a database cluster, use the command initdb, which is installed with PostgreSQL. This must be done as the postgres user, so become this user:
-sudo -i -u postgres
-initdb -D '/var/lib/postgres/data' # this one is in postgres console
-
-# Start service
-sudo systemctl start postgresql
-
-# PostgreSQL is now running. By creating another PostgreSQL user as per your local Arch user ($USER), you can access the PostgreSQL database shell directly instead of having to log in as the postgres user:
-createuser -s -U postgres --interactive # after enter your pc username
-
-createdb myDatabaseName
-psql -d myDatabaseName
-\du
-
-
-# Allow access from anywhere
-sudo echo 'host    all             all              0.0.0.0/0' >> /var/lib/postgres/data/hba_file.conf
-sudo echo "listen_addresses = '*'" >> /var/lib/postgres/data/postgresql.conf
-
-
-# mount opt from home
-echo "/home/yourpc/app/opt /opt none bind 0 0" >> /etc/fstab
-
-systemctl enable postgresql.service
-```
-
-
- Mariadb Installation 
-```
-sudo pacman -S mariadb
-systemctl enable mysqld.service
-```
-
-
 # Starting Service
-systemctl enable thermald.service
+sudo systemctl enable thermald.service
 
 
 

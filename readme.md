@@ -1,10 +1,3 @@
----
-title: Arch Linux Installation
-date: today
-author: Me
----
-
-
 # Connect to Wifi network
 ```
 # wifi-menu

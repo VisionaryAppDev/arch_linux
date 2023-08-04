@@ -245,6 +245,7 @@ CheckSpace
 UseDelta     = 0.7
 VerbosePkgLists
 RemoteFileSigLevel = Required
+ParallelDownloads = 10
 " | sudo tee -a /etc/pacman.conf
 ```
 

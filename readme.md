@@ -254,6 +254,21 @@ ParallelDownloads = 10
 ```
 pacman -S ufw && ufw enable && ufw status verbos && systemctl enable ufw.service thermald xf86-input-libinput
 pacman-optimize samsung_magician
+
+
+# DNS
+pacman -S systemd-resolved
+
+# Config DNS here 
+suodo vim /etc/systemd/resolved.conf
+
+## Note do not enable DNSSEC otherwise it won't work
+DNS=45.90.28.0#Acer--v15--ID-OF-NEXT-DNS.dns.nextdns.io
+DNS=45.90.28.0#ID-OF-NEXT-DNS.dns.nextdns.io
+DNS=2a07:a8c0::#ID-OF-NEXT-DNS.dns.nextdns.io
+DNS=45.90.30.0#ID-OF-NEXT-DNS.dns.nextdns.io
+DNS=2a07:a8c1::#ID-OF-NEXT-DNS.dns.nextdns.io
+DNSOverTLS=yes
 ```
 
 

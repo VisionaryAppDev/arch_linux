@@ -270,6 +270,10 @@ DNS=45.90.30.0#ID-OF-NEXT-DNS.dns.nextdns.io
 DNS=2a07:a8c1::#ID-OF-NEXT-DNS.dns.nextdns.io
 DNSOverTLS=yes
 Cache=yes
+
+
+# cleaner, alternative and more star than bleachbit
+yay czkawka-gui
 ```
 
 

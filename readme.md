@@ -4,6 +4,7 @@
 # Use root
 sudo su
 
+
 # Option 1
 wifi-menu
 
@@ -39,16 +40,18 @@ Create 4 primary partitions:
 fdisk -l
 fdisk /dev/sda
 
-# Causion!!
+###########################
+# =====> Causion!! <======
+##########################
 #
 # => Format partitions:
-#		mkfs.fat -F32 /dev/sda1
-#		mkfs.ext4 /dev/sda2
-#		mkfs.ext4 /dev/sda2
+#		mkfs.fat -F32 /dev/sda1        # 
+#		mkfs.ext4 /dev/sda2            # /mnt
+#		mkfs.ext4 /dev/sda3            # /home
 #
 # => Swap:
 #		mkswap /dev/sda4
-#		swapon: /dev/sda4
+#		swapon /dev/sda4
 #
 # => Mount
 # 		mount /dev/sda2 /mnt

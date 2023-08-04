@@ -1,8 +1,8 @@
 #+TITLE: Arch Linux Installation 
 
 
-* Connect to Wifi network
-#+BEGIN_SRC
+# Connect to Wifi network
+```
 # wifi-menu
 # iwconfig wlp3s0 essid wifiname
 # dhcpcd wlp3s0
@@ -20,10 +20,10 @@
 # Address=('192.168.1.10/24')
 # Gateway=('92.168.1.1')
 # DNS=('192.168.1.1')
-#+END_SRC
+```
 
 
-* Create Partition Size
+# Create Partition Size
 Create 4 primary partitions:
 - EFI 512M # Must be first partition
 - Root
@@ -31,7 +31,7 @@ Create 4 primary partitions:
 - Swap
 
 *NOTE*: +512M so you don't need to specific range of start and end sector 
-#+BEGIN_SRC
+```
 fdisk -l
 fdisk /dev/sda
 
@@ -50,31 +50,31 @@ fdisk /dev/sda
 # 		mount /dev/sda2 /mnt
 #		mkdir /mnt/home
 # 		mount /dev/sda3 /mnt/home
-#+END_SRC
+```
 
-* Based Installation
+# Based Installation
 base vs base-devel:
  - https://www.archlinux.org/groups/x86_64/base/
  - https://www.archlinux.org/groups/x86_64/base-devel/
 
-** Update Mirror 
-#+BEGIN_SRC
+ Update Mirror 
+```
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 echo "Server = http://mirror.xtom.com/archlinux/\$repo/os/\$arch"  > /etc/pacman.d/mirrorlist
-#+END_SRC
+```
 
-** Installing
-#+BEGIN_SRC
+ Installing
+```
 pacstrap /mnt base base-devel linux linux-firmware vim
 genfstab -U /mnt > /mnt/etc/fstab
-#+END_SRC
+```
 
-*Note* If error related to core.db, ....db then check its content. If the content is full of html, then there is something block the connection. This happen especially at GDCE
+*Note# If error related to core.db, ....db then check its content. If the content is full of html, then there is something block the connection. This happen especially at GDCE
 
 
-* Real OS
-** Basic Configuration
- #+BEGIN_SRC
+# Real OS
+ Basic Configuration
+ ```
 arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Asia/Phnom_Penh /etc/localtime
 hwclock --systohc
@@ -83,29 +83,29 @@ echo "yourpc" >> /etc/hostname
 echo -e "127.0.0.1\tlocalhost" > /etc/hosts
 echo -e "::1\t\tlocalhost" >> /etc/hosts
 echo -e "127.0.1.1\cc.localdomain cc" >> /etc/hosts
-#+END_SRC
+```
 
-** User User and Password
+ User User and Password
 - Root Password
-#+BEGIN_SRC
+```
 passwd 
-#+END_SRC
+```
 
 - Add User
-#+BEGIN_SRC
+```
 useradd yourpc -m yourpc
 su yourpc passwd
-#+END_SRC
+```
 
 
-** Bootloader
-#+BEGIN_SRC
+ Bootloader
+```
 pacman -S grub efibootmgr grub-customizer # this customerize is interested since it is allow you to select any default kernel to boot by default
 mkdir /boot/efi
 mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
-#+END_SRC
+```
 
 # Sample from grub-customizer
 cat /etc/default/grub
@@ -121,7 +121,7 @@ GRUB_GFXMODE="auto"
 
 
 
-** Change Boot Order 
+ Change Boot Order 
 Please check /dev/sdaX accordingly 
 
 # If access from arch-chroot
@@ -157,10 +157,10 @@ WantedBy=multi-user.target
 
 # Restart to take effect
 
-** Basic Package
+ Basic Package
 Check this page for some group of plasma. `https://wiki.archlinux.org/title/KDE`. 
 
-#+BEGIN_SRC
+```
 pacman -Syu telegram-desktop kcolorpicker ark lrzip lzop p7zip unarchiver unrar tar
 pacman -Syu dhclient tor npm vlc git xorg plasma dolphin netctl redshift transmission-gtk wget bash-completion ntfs-3g curl eog 
 pacman -Syu linux-lts-headers linux-lts  bleachbit konsole
@@ -191,24 +191,24 @@ sudo systemctl disable dhcpcd.service
 
 
 # Add netspeed from KDE Widget
-#+END_SRC
+```
 
-** Make makepkg build a little faster 
-#+BEGIN_SRC
+ Make makepkg build a little faster 
+```
 echo -e "
 MAKEFLAGS="-j$(nproc)"
 " | sudo tee -a /etc/makepkg.conf
-#+END_SRC
+```
 
 
-** Yay Installation
-#+BEGIN_SRC
+ Yay Installation
+```
 cd /tmp
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-## Enable coloring
+ Enable coloring
 echo -e "
 \n\n\n\n
 Color
@@ -218,20 +218,20 @@ UseDelta     = 0.7
 VerbosePkgLists
 RemoteFileSigLevel = Required
 " | sudo tee -a /etc/pacman.conf
-#+END_SRC
+```
 
 
 
-** Change grub delay
-#+BEGIN_SRC
+ Change grub delay
+```
 sudo vim /etc/default/grub => GRUB_FORCE_HIDDEN_MENU="true"
 pacman -S ufw && ufw enable && ufw status verbos && systemctl enable ufw.service thermald xf86-input-libinput
 pacman-optimize samsung_magician
-#+END_SRC
+```
 
 
-** Postgres Installation
-#+BEGIN_SRC
+ Postgres Installation
+```
 # Installing PSQL: https://www.netarky.com/programming/arch_linux/Arch_Linux_PostgreSQL_database_setup.html
 pacman -Syu postgresql
 
@@ -265,14 +265,14 @@ sudo echo "listen_addresses = '*'" >> /var/lib/postgres/data/postgresql.conf
 echo "/home/yourpc/app/opt /opt none bind 0 0" >> /etc/fstab
 
 systemctl enable postgresql.service
-#+END_SRC
+```
 
 
-** Mariadb Installation 
-#+BEGIN_SRC
+ Mariadb Installation 
+```
 sudo pacman -S mariadb
 systemctl enable mysqld.service
-#+END_SRC
+```
 
 
 # Starting Service
@@ -315,18 +315,18 @@ os-prober
 
 
 # INSTALLING PRINTER: https://unix.stackexchange.com/questions/359531/installing-hp-printer-driver-for-arch-linux
-#+BEGIN_SRC
+```
 # Everything is root
 pacman -Sy cups
 pacman -S hplip
 hp-setup -i
 gpasswd -a theUserNameOfPC sys
-#+END_SRC
+```
 
 
 
-** PHP Installation
-#+BEGIN_SRC
+ PHP Installation
+```
 pacman -S pacman -S composer npm
 yay php72 php72-fpm php72-pgsql php72-redis php72-mcrypt
 
@@ -341,11 +341,11 @@ extension=pdo_pgsql
 extension=pgsql
 " | sudo tee -a /etc/php72/php.ini
 # NOTE phpize72 is included in php72
-#+END_SRC
+```
 
 
 - Sample nginx.conf 
-#+BEGIN_SRC
+```
 server {
     listen 80;
     listen [::]:80;
@@ -372,10 +372,10 @@ server {
         include fastcgi_params;
     }
 
-    location ~ /\.(?!well-known).* {
+    location ~ /\.(?!well-known).# {
         deny all;
     }
 }
-#+END_SRC
+```
 
 

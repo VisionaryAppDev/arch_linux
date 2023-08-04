@@ -269,6 +269,7 @@ DNS=2a07:a8c0::#ID-OF-NEXT-DNS.dns.nextdns.io
 DNS=45.90.30.0#ID-OF-NEXT-DNS.dns.nextdns.io
 DNS=2a07:a8c1::#ID-OF-NEXT-DNS.dns.nextdns.io
 DNSOverTLS=yes
+Cache=yes
 ```
 
 

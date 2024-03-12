@@ -198,7 +198,8 @@ Check this page for some group of plasma. `https://wiki.archlinux.org/title/KDE`
 pacman -Syu telegram-desktop kcolorpicker ark lrzip lzop p7zip unarchiver unrar tar
 pacman -Syu dhclient tor npm vlc git xorg plasma dolphin netctl redshift transmission-gtk wget bash-completion ntfs-3g curl eog 
 pacman -Syu linux-lts-headers linux-lts  bleachbit konsole
-pacman -Syu tree ufw spectacle simplescreenrecorder ripgrep gparted eog ttf-fira-code
+pacman -Syu tree ufw spectacle simplescreenrecorder ripgrep gparted eog 
+pacman -Syu ttf-fira-code ttf-hack-nerd otf-monaspace-nerd ttf-firacode-nerd ttf-jetbrains-mono-nerd ttf-noto-nerd
 ```
 
 # Update firewall

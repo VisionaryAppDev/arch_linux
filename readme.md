@@ -451,6 +451,6 @@ sudo pacman -S nvtop
 ## Steam
 Link: https://wiki.archlinux.org/title/steam
 - Enable multi-lib
-- Install OpenGL driver ```xf86-video-amdgpu```
+- Install OpenGL driver ```sudo pacman -S xf86-video-amdgpu```
 - If you need to add library folders or add non-Steam games to your Steam library: ```sudo pacman -S xdg-desktop-portal```
-- Font: ```pacman -S  ttf-liberation lib32-fontconfig ttf-liberation``` and ```yay ttf-ms-win11-auto```
+- Font: ```sudo pacman -S  ttf-liberation lib32-fontconfig ttf-liberation``` and ```yay ttf-ms-win11-auto```

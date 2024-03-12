@@ -212,7 +212,7 @@ sudo ufw enable
 
 # INSTALL VIA YAY
 ```
-yay -Syu firefox-nighty google-chrome-dev intellij-idea-ue-eap jdk-openjdk otf-fira-code ttf-symbola
+yay -Syu firefox-nighty google-chrome-dev intellij-idea-ue-eap jdk-openjdk ttf-symbola hurl
 ```
 
 

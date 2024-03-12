@@ -286,6 +286,11 @@ yay czkawka-gui
 ```
 
 
+## Auto clean cache weekly
+```
+sudo pacman -S pacman-contrib 
+sudo systemctl enable paccache.timer
+```
 
 
 

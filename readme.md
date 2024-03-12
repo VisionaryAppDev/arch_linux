@@ -201,6 +201,9 @@ pacman -Syu linux-lts-headers linux-lts  bleachbit konsole
 pacman -Syu tree ufw spectacle simplescreenrecorder ripgrep gparted eog 
 pacman -Syu ttf-fira-code ttf-hack-nerd otf-monaspace-nerd ttf-firacode-nerd ttf-jetbrains-mono-nerd ttf-noto-nerd
 
+# Spell check and font
+pacman -Syu enchant hunspell-en_US aspell-en ttf-bitstream-vera ttf-liberation adobe-source-sans-pro-fonts ttf-dejavu 
+
 # Security 
 pacman -Syu amd-ucode
 grub-mkconfig -o /boot/grub/grub.cfg

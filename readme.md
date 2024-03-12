@@ -200,6 +200,10 @@ pacman -Syu dhclient tor npm vlc git xorg plasma dolphin netctl redshift transmi
 pacman -Syu linux-lts-headers linux-lts  bleachbit konsole
 pacman -Syu tree ufw spectacle simplescreenrecorder ripgrep gparted eog 
 pacman -Syu ttf-fira-code ttf-hack-nerd otf-monaspace-nerd ttf-firacode-nerd ttf-jetbrains-mono-nerd ttf-noto-nerd
+
+# Security 
+pacman -Syu amd-ucode
+grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 # Update firewall

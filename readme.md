@@ -198,11 +198,14 @@ Check this page for some group of plasma. `https://wiki.archlinux.org/title/KDE`
 pacman -Syu telegram-desktop kcolorpicker ark lrzip lzop p7zip unarchiver unrar tar
 pacman -Syu dhclient tor npm vlc git xorg plasma dolphin netctl redshift transmission-gtk wget bash-completion ntfs-3g curl eog 
 pacman -Syu linux-lts-headers linux-lts  bleachbit konsole
-pacman -Syu tree ufw spectacle simplescreenrecorder ripgrep gparted eog 
+pacman -Syu tree ufw spectacle simplescreenrecorder ripgrep gparted eog rsync
 pacman -Syu ttf-fira-code ttf-hack-nerd otf-monaspace-nerd ttf-firacode-nerd ttf-jetbrains-mono-nerd ttf-noto-nerd
 
 # Spell check and font
 pacman -Syu enchant hunspell-en_US aspell-en ttf-bitstream-vera ttf-liberation adobe-source-sans-pro-fonts ttf-dejavu 
+
+# Codex
+pacman -S flac
 
 # Security 
 pacman -Syu amd-ucode

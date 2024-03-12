@@ -251,7 +251,6 @@ makepkg -si
 echo -e "
 \n\n\n\n
 Color
-TotalDownload
 CheckSpace
 UseDelta     = 0.7
 VerbosePkgLists

@@ -87,13 +87,21 @@ Basic Configuration
 
 ```
 arch-chroot /mnt
+
+# Time
 ln -sf /usr/share/zoneinfo/Asia/Phnom_Penh /etc/localtime
 hwclock --systohc
+
+# Language
+echo -e "en_US.UTF-8 UTF-8"   >> /etc/locale.gen
+echo -e "km_KH UTF-8"   >> /etc/locale.gen
 locale-gen
+
+
 echo "yourpc" >> /etc/hostname
 echo -e "127.0.0.1\tlocalhost" > /etc/hosts
 echo -e "::1\t\tlocalhost" >> /etc/hosts
-echo -e "127.0.1.1\cc.localdomain cc" >> /etc/hosts
+echo -e "127.0.1.1\tyourpc" >> /etc/hosts
 ```
 
 ## User User and Password
@@ -123,8 +131,7 @@ cat /etc/default/grub
 ```
 GRUB_TIMEOUT="1"
 GRUB_DEFAULT="Advanced options for Linux>Linux, with Linux linux"
-GRUB_SAVEDEFAULT="false"
-GRUB_DISABLE_OS_PROBER="true"
+GRUB_SAVEDEFAULT="true"
 GRUB_TIMEOUT_STYLE="menu"
 GRUB_TERMINAL_INPUT="console"
 GRUB_GFXMODE="auto"
@@ -264,10 +271,9 @@ suodo vim /etc/systemd/resolved.conf
 
 ## Note do not enable DNSSEC otherwise it won't work
 DNS=45.90.28.0#Acer--v15--ID-OF-NEXT-DNS.dns.nextdns.io
-DNS=45.90.28.0#ID-OF-NEXT-DNS.dns.nextdns.io
-DNS=2a07:a8c0::#ID-OF-NEXT-DNS.dns.nextdns.io
-DNS=45.90.30.0#ID-OF-NEXT-DNS.dns.nextdns.io
-DNS=2a07:a8c1::#ID-OF-NEXT-DNS.dns.nextdns.io
+DNS=2a07:a8c0::#Acer--v15--ID-OF-NEXT-DNS.dns.nextdns.io
+DNS=45.90.30.0#Acer--v15--ID-OF-NEXT-DNS.dns.nextdns.io
+DNS=2a07:a8c1::#Acer--v15--ID-OF-NEXT-DNS.dns.nextdns.io
 DNSOverTLS=yes
 Cache=yes
 

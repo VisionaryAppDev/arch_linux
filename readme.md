@@ -388,3 +388,60 @@ server {
 ```
 
 
+
+
+
+
+# GPU Driver
+##  Mesa
+Link: https://wiki.archlinux.org/title/AMDGPU
+```
+pacman -S  mesa
+```
+
+### Accelerated video decoding
+```
+sudo pacman -S libva-mesa-driver   mesa-vdpau
+```
+
+
+## Vulkan
+Link: https://wiki.archlinux.org/title/Vulkan
+
+```
+sudo pacman -S vulkan-icd-loader  
+
+# Driver, one is required but you can try both and see which is better
+sudo pacman -S vulkan-radeon amdvlk 
+```
+
+### Verification
+```
+ls /usr/share/vulkan/icd.d/
+
+vulkaninfo
+```
+
+### Switching between AMD drivers
+#### Installation 
+```
+yay amd-vulkan-prefixes
+```
+
+#### Command
+- vk_radv 
+- vk_amdvlk
+ 
+```
+vk_pro command
+```
+
+
+### GPU Monitoring
+- https://github.com/Umio-Yasuno/amdgpu_top
+- https://github.com/Syllo/nvtop
+
+```
+yay amdgpu_top
+sudo pacman -S nvtop
+```

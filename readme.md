@@ -396,7 +396,7 @@ server {
 ##  Mesa
 Link: https://wiki.archlinux.org/title/AMDGPU
 ```
-pacman -S  mesa
+pacman -S mesa
 ```
 
 ### Accelerated video decoding
@@ -411,8 +411,10 @@ Link: https://wiki.archlinux.org/title/Vulkan
 ```
 sudo pacman -S vulkan-icd-loader  
 
+
 # Driver, one is required but you can try both and see which is better
-sudo pacman -S vulkan-radeon amdvlk 
+# Steam require 32 bit version, so need to install it too.
+sudo pacman -S vulkan-radeon amdvlk lib32-vulkan-radeon lib32-amdvlk
 ```
 
 ### Verification
@@ -445,3 +447,10 @@ vk_pro command
 yay amdgpu_top
 sudo pacman -S nvtop
 ```
+
+## Steam
+Link: https://wiki.archlinux.org/title/steam
+- Enable multi-lib
+- Install OpenGL driver ```xf86-video-amdgpu```
+- If you need to add library folders or add non-Steam games to your Steam library: ```sudo pacman -S xdg-desktop-portal```
+- Font: ```pacman -S  ttf-liberation lib32-fontconfig ttf-liberation``` and ```yay ttf-ms-win11-auto```

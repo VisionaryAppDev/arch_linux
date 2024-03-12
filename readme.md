@@ -119,9 +119,13 @@ su yourpc passwd
 
  Bootloader
 ```
-pacman -S grub efibootmgr grub-customizer # this customerize is interested since it is allow you to select any default kernel to boot by default
+# this customerize is interested since it is allow you to select any default kernel to boot by default
+pacman -S grub efibootmgr grub-customizer 
+
+
+# /dev/sda1 isn't the root partition, it is the efi partition which is likely the one created by microsoft if we use dual boot. Otherwise, we need to create this partition manually 
 mkdir /boot/efi
-mount /dev/sda1 /boot/efi
+mount /dev/sda1 /boot/efi 
 grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
@@ -259,8 +263,7 @@ ParallelDownloads = 10
 
 # Some package
 ```
-pacman -S ufw && ufw enable && ufw status verbos && systemctl enable ufw.service thermald xf86-input-libinput
-pacman-optimize samsung_magician
+pacman -S ufw && ufw enable && ufw status verbos && systemctl enable ufw.service samsung_magician
 
 
 # DNS
@@ -283,8 +286,6 @@ yay czkawka-gui
 ```
 
 
-# Starting Service
-sudo systemctl enable thermald.service
 
 
 

@@ -238,6 +238,7 @@ sudo pacman -S modemmanager mobile-broadband-provider-info usb_modeswitch
 ```
 sudo systemctl enable NetworkManager.service
 sudo systemctl enable wpa_supplicant.service
+sudo systemctl enable fstrim.timer # trim ssd
 sudo systemctl disable dhcpcd.service
 ```
 

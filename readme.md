@@ -202,7 +202,8 @@ pacman -Syu tree ufw spectacle simplescreenrecorder ripgrep gparted eog rsync
 pacman -Syu ttf-fira-code ttf-hack-nerd otf-monaspace-nerd ttf-firacode-nerd ttf-jetbrains-mono-nerd ttf-noto-nerd
 
 # Spell check and font
-pacman -Syu enchant hunspell-en_US aspell-en ttf-bitstream-vera ttf-liberation adobe-source-sans-pro-fonts ttf-dejavu 
+pacman -Syu enchant hunspell-en_US aspell-en ttf-bitstream-vera ttf-liberation adobe-source-sans-pro-fonts ttf-dejavu otf-font-awesome
+yay ttf-weather-icons
 
 # Codex
 pacman -S flac

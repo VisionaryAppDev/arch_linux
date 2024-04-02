@@ -200,6 +200,7 @@ pacman -Syu dhclient tor npm vlc git xorg plasma dolphin netctl redshift transmi
 pacman -Syu linux-lts-headers linux-lts  bleachbit konsole kdeconnect
 pacman -Syu tree ufw spectacle simplescreenrecorder ripgrep gparted eog rsync
 pacman -Syu ttf-fira-code ttf-hack-nerd otf-monaspace-nerd ttf-firacode-nerd ttf-jetbrains-mono-nerd ttf-noto-nerd
+pacman -Syu hddtemp lm_sensors
 
 # Spell check and font
 pacman -Syu enchant hunspell-en_US aspell-en ttf-bitstream-vera ttf-liberation adobe-source-sans-pro-fonts ttf-dejavu otf-font-awesome
